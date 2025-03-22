@@ -55,9 +55,9 @@ menu.addEventListener("click", function (event) {
 function addToCart(name, price) {
 
     // Verificar se o item já está no carrinho
-    const existingItem = cart.find(item => item.name === name)
+    const existingItem = cart.find(item => item.name === name) 
     
-    alert("Item adicionado ao carrinho é " + name + "!")
+    alert("Item " + name + "adicionado ao carrinho!")
 
    
     if (existingItem) {
