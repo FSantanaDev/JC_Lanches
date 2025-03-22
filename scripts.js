@@ -202,7 +202,7 @@ checkoutBtn.addEventListener("click", function () {
 function checRestauranteOpen() {
     const data = new Date();
     const hour = data.getHours();
-    return hour >= 18 && hour < 22; // Ajuste para 18h às 21:59
+    return hour >= 8 && hour < 22; // Ajuste para 18h às 21:59
 }
 
 const spanItem = document.getElementById("date-span"); // Seleciona a div
