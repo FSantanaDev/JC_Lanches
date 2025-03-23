@@ -10,7 +10,36 @@ const errorWarn = document.getElementById("error-warn") // Elemento para exibir 
 const addressInput = document.getElementById("address")   // Elemento de entrada de endereço de entrega
 const addressWarn = document.getElementById("address-warn") // Elemento para exibir a mensagem de erro/warn
 
+
+const deliveryMethodSelect = document.getElementById("delivery-method");
+const paymentMethodSelect = document.getElementById("payment-method");
+const pixDetailsDiv = document.getElementById("pix-details");
+const addressLabel = document.getElementById("address-label");
+
+
+const copyPixKeyButton = document.getElementById("copy-pix-key");
+const pixKey = document.getElementById("pix-key");
+
+
+
+
+
 let cart = []
+
+
+
+//
+deliveryMethodSelect.addEventListener("change", function () {
+    if (deliveryMethodSelect.value === "pickup") {
+        addressInput.classList.add("hidden");
+        addressLabel.classList.add("hidden");
+        addressWarn.classList.add("hidden");
+    } else {
+        addressInput.classList.remove("hidden");
+        addressLabel.classList.remove("hidden");
+    }
+});
+
 
 // Função exibir o modal do carrinho
 cartBtn.addEventListener("click", function () {
@@ -18,24 +47,16 @@ cartBtn.addEventListener("click", function () {
     cartModal.style.display = "flex"
     
 });
-
-
-
 //fechar  modal do carrinho qyando clicar fora dele 
 window.addEventListener("click", function (event) {
     if (event.target == cartModal) {
         cartModal.style.display = "none"
     }       
 })
-
 //fechar  modal do carrinho qyando clicar no botão de fechar
 closeModalBtn.addEventListener("click", function () {
     cartModal.style.display = "none"
 });
-
-
-
-
 menu.addEventListener("click", function (event) {
     // Função para saber onde foi o click do usuário
     let parentButton = event.target.closest(".add-to-cart-btn")
@@ -47,19 +68,13 @@ menu.addEventListener("click", function (event) {
    
     //adicionar o item ao carrinho
     addToCart(name, price)
-   }
-  
-    
+   }    
 })
-
 function addToCart(name, price) {
 
     // Verificar se o item já está no carrinho
-    const existingItem = cart.find(item => item.name === name) 
-    
-    alert("Item " + name + "adicionado ao carrinho!")
-
-   
+    const existingItem = cart.find(item => item.name === name)     
+    alert("Item " + name + "adicionado ao carrinho!")   
     if (existingItem) {
         // Se o item já está no carrinho, incrementar a quantidade
         existingItem.quantity +=1;
@@ -81,23 +96,15 @@ function updateCartModal() {
         cartItemElement.classList.add("flex","justify-between", "mb-4", "flex-col")
 
         cartItemElement.innerHTML = `
-
-        <div class="flex items-center justify-between">
-            
-            <div>
-                
+        <div class="flex items-center justify-between">            
+            <div>                
                 <p class="font-medium">${item.name}</p>
-
                 <p> Qtd: ${item.quantity}</p>
-
-                <p class="font-medium mt-2"> R$ ${item.price.toFixed(2)}</p>
-                
+                <p class="font-medium mt-2"> R$ ${item.price.toFixed(2)}</p>                
             </div>
-
             <button class="remove-from-cart-btn" data-name="${item.name}">
                 Remover
-            </button>       
-        
+            </button>     
         </div 
         `
         total += item.price * item.quantity
@@ -107,13 +114,7 @@ function updateCartModal() {
         {style: "currency", 
         currency: "BRL"
     });
-
     cartCounter.innerHTML = cart.length
-
-
-
-
-
 }
     
 // removr item do carrinho
@@ -140,8 +141,6 @@ cartItemsContainer.addEventListener("click", function (event) {
 }
 
 
-
-
 addressInput.addEventListener("input", function(event){   
     let inputValue = event.target.value;
 
@@ -149,60 +148,64 @@ addressInput.addEventListener("input", function(event){
         addressWarn.classList.add("hidden")
         addressInput.classList.remove("border-red-500") 
     }
-})   
-
-
+})  
 
 checkoutBtn.addEventListener("click", function () {
-    
     const isOpen = checRestauranteOpen();
     if (!isOpen) {
         Toastify({
             text: "Estamos Fechados no Momento - Funcionamos de SEG a DOM - 18:00 - 22:00",
-            duration: 5000,       
+            duration: 5000,
             close: true,
-            gravity: "top", // `top` or `bottom`
-            position: "center", // `left`, `center` or `right`
-            stopOnFocus: true, // Prevents dismissing of toast on hover
+            gravity: "top",
+            position: "center",
+            stopOnFocus: true,
             style: {
-              background: "#ef4444",
+                background: "#ef4444",
             },
-            onClick: function(){} // Callback after click
-          }).showToast();
+            onClick: function () {},
+        }).showToast();
         return;
     }
-    
+
     if (cart.length === 0) return;
-    
-    if (addressInput.value === "") {
-        addressWarn.classList.remove("hidden")
-        addressInput.classList.add("border-red-500") 
-        return;
+
+    const deliveryMethod = deliveryMethodSelect.value;
+
+    if (deliveryMethod === "delivery") {
+        // Se o método de entrega for "delivery", valide o endereço
+        if (addressInput.value === "") {
+            addressWarn.classList.remove("hidden");
+            addressInput.classList.add("border-red-500");
+            return;
+        }
+    } else {
+        // Se o método de entrega for "pickup", esconda o input de endereço e remova a validação
+        addressInput.classList.add("hidden");
+        addressLabel.classList.add("hidden");
+        addressWarn.classList.add("hidden");
     }
 
-    //enviar o pedido para a api do whatsapp
+    // Enviar o pedido para a API do WhatsApp
     const cartItems = cart.map((item) => {
-        return (
-            `${item.name} Qauntidade: ${item.quantity} Preço: R$ ${item.price} |`
-        ) 
-    }).join("")
+        return `${item.name} Quantidade: ${item.quantity} Preço: R$ ${item.price} |`;
+    }).join("");
 
-    const message = encodeURIComponent(cartItems)
+    const message = encodeURIComponent(`${cartItems} Endereço: ${addressInput.value}`);
     const phone = "5592991155839";
 
-    window.open(`https://wa.me/${phone}?text=${message} Endereço: ${addressInput.value}`, "_blank")
-    })
-     
-    cart = []
-    updateCartModal() ;
+    window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
 
+    cart = [];
+    updateCartModal();
+});
 
 
 // Função para verificar se o restaurante está aberto
 function checRestauranteOpen() {
     const data = new Date();
     const hour = data.getHours();
-    return hour >= 8 && hour < 22; // Ajuste para 18h às 21:59
+    return hour >= 22 && hour < 6; // Ajuste para 18h às 21:59
 }
 
 const spanItem = document.getElementById("date-span"); // Seleciona a div
@@ -218,3 +221,27 @@ if (isOpen) {
     spanItem.classList.add("bg-red-500");
     spanItem.querySelector("span").innerHTML = " Estamos Fechados no Momento - Funcionamos de SEG a DOM - 18:00 - 22:00";
 }
+
+// FUNÇÃO FORMA DE PAGAMENTO
+
+paymentMethodSelect.addEventListener("change", function () {
+    if (paymentMethodSelect.value === "pix") {
+        pixDetailsDiv.classList.remove("hidden");
+        pixDetailsDiv.classList.add("flex", "flex-col", "items-center", "justify-center");
+    } else {
+        pixDetailsDiv.classList.add("hidden");
+        pixDetailsDiv.classList.remove("flex", "flex-col", "items-center", "justify-center");
+    }
+});
+
+
+
+copyPixKeyButton.addEventListener("click", function () {
+    const textArea = document.createElement("textarea");
+    textArea.value = pixKey.textContent;
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand("copy");
+    document.body.removeChild(textArea);
+    alert("Chave PIX copiada!");
+});
