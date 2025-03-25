@@ -12,26 +12,31 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="./styles/output.css" />
-    <title>Document</title>
+    <title>Jc Burguer</title>
 </head>
 <body>
-  <!--- heaeder -->
-  <header class="class= w-full h-[420px] bg-zinc-900 bg-home bg-cover bg-center">
-    <div class="w-full h-full flex flex-col justify-center items-center">
-     
-        <img src="./assets/hamb-1.png"
-      alt="hamburger"
-       class="w-32 h-32 rounded-full shadow-lg hover:scale-110 duration-200 ease-in-out"
-       />
-     <h1 class="text-4xl text-white mt-4 mb-2 font-bold">JC BURGUER</h1>
-      
-      <span class="text-white font-medium"> Rua fulano de tal 10  - Japiim  - Manaus - AM</span>
 
+
+  <header class="w-full h-[420px] bg-zinc-900 bg-home bg-cover bg-center relative">
+    <div class="w-full h-full flex flex-col justify-center items-center">
+        <img src="./assets/logo.png" alt="hamburger" class="w-32 h-32 rounded-full shadow-lg hover:scale-110 duration-200 ease-in-out" />
+        <h1 class="text-4xl text-white mt-4 mb-2 font-bold">JC BURGUER</h1>
+        <span class="text-white font-medium"> Rua Olavo Bilac - Japiim - Manaus - AM</span>
         <div class="bg-green-600 rounded-lg px-4 py-1 mt-5 mb-5" id="date-span">
-             <span class="text-white font-medium">Aberto de SEG a DOM  - 08:00 - 22:00</span>
+            <span class="text-white font-medium">Aberto de SEG a DOM - 08:00 - 22:00</span>
         </div>
     </div>
-  </header>
+    
+</header>
+
+
+
+
+
+
+
+
+
    <!--- fim do heaeder -->
 <h2 class="text-2xl md:text-5xl font-bold text-center mt-9 mb-6">
     Conheça o nosso Menu
@@ -137,43 +142,43 @@
         <h2 class="text-3xl font-bold">Bebidas</h2>
       </div> 
         <!---  grid de bebidas -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 md:gap-20 mx-auto max-w-7xl px-2 mb-40" id="menu">    
-              <div class="flex gap-5 w-full">
-                <img src="./assets/refri-2.png" alt="Guarana Antartica"  class="w-28 h-28 rounded-lg hover:scale-110 hover:-rotate-12 duration-300"/>
-                  <div>
-                      <p class="font-bold">Guarana Antartica</p>
-                      <p class="text-sm">Refrigerante Guarana Antartica 350ml</p>
-                      
-                      <div class="flex items-center gap-2 justify-between mt-3">
-                        <p class="font-bold text-lg">R$ 6</p>
-                        <button  class="bg-gray-900 px-5 rounded add-to-cart-btn"
-                        data-name = "Guarana Antartica"
-                        data-price = "6"
-                        >
-                        <i class="fa fa-cart-plus text-lg text-white"></i>
-                        </button>
-                      </div>      
-                  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 md:gap-20 mx-auto max-w-7xl px-2 mb-40" id="menu">    
+          <div class="flex gap-5 w-full">
+            <img src="./assets/refri-2.png" alt="Guarana Antartica"  class="w-28 h-28 rounded-lg hover:scale-110 hover:-rotate-12 duration-300"/>
+              <div>
+                  <p class="font-bold">Guarana Antartica</p>
+                  <p class="text-sm">Refrigerante Guarana Antartica 350ml</p>
+                  
+                  <div class="flex items-center gap-2 justify-between mt-3">
+                    <p class="font-bold text-lg">R$ 6</p>
+                    <button  class="bg-gray-900 px-5 rounded add-to-cart-btn"
+                    data-name = "Guarana Antartica"
+                    data-price = "6"
+                    >
+                    <i class="fa fa-cart-plus text-lg text-white"></i>
+                    </button>
+                  </div>      
               </div>
-        
-              <div class="flex gap-5 w-full">
-                <img src="./assets/refri-1.png" alt="Coca-Cola"  class="w-28 h-28 rounded-lg hover:scale-110 hover:-rotate-12 duration-300"/>
-                  <div>
-                      <p class="font-bold">Coca-Cola</p>
-                      <p class="text-sm">Refrigerante Coca-Cola Lata 350ml</p>
-                      
-                      <div class="flex items-center gap-2 justify-between mt-3">
-                        <p class="font-bold text-lg">R$ 6</p>
-                        <button  class="bg-gray-900 px-5 rounded add-to-cart-btn"
-                        data-name = "Coca-Cola"
-                        data-price = "6"
-                        >
-                        <i class="fa fa-cart-plus text-lg text-white"></i>
-                        </button>
-                      </div>      
-                  </div>
-              </div> 
-      </div>  
+          </div>
+    
+          <div class="flex gap-5 w-full">
+            <img src="./assets/refri-1.png" alt="Coca-Cola"  class="w-28 h-28 rounded-lg hover:scale-110 hover:-rotate-12 duration-300"/>
+              <div>
+                  <p class="font-bold">Coca-Cola</p>
+                  <p class="text-sm">Refrigerante Coca-Cola Lata 350ml</p>
+                  
+                  <div class="flex items-center gap-2 justify-between mt-3">
+                    <p class="font-bold text-lg">R$ 6</p>
+                    <button  class="bg-gray-900 px-5 rounded add-to-cart-btn"
+                    data-name = "Coca-Cola"
+                    data-price = "6"
+                    >
+                    <i class="fa fa-cart-plus text-lg text-white"></i>
+                    </button>
+                  </div>      
+              </div>
+          </div> 
+  </div>  
   <!---  fim do grid de bebidas -->
  </div>
  <!--- modal-cart -->
@@ -218,6 +223,25 @@
 <!---  fim modal-cart -->
 <!---  fim menumenu -->
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- Button  Cart-footer -->
 <footer class="w-full bg-red-500 py-2 fixed bottom-0 z-40 flex items-center justify-center"> 
     <button class="flex items-center gap-2 text-white font-bold" id="cart-btn"> 
@@ -227,6 +251,54 @@
     </button>
 </footer>
 </div>
+<!---  fim Button  Cart-footer -->
+
+
+<!---  inicio do painel administrativo  -->
+<div id="admin-panel" class="hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-6 border border-gray-300 shadow-md rounded-md">
+  <h2 class="text-2xl font-bold mb-4">Painel de Administração</h2>
+  <form id="product-form" class="space-y-4">
+      <div>
+          <label for="product-name" class="block font-medium text-gray-700">Nome do Produto:</label>
+          <input type="text" id="product-name" name="product-name" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+      </div>
+      <div>
+          <label for="product-price" class="block font-medium text-gray-700">Preço:</label>
+          <input type="number" id="product-price" name="product-price" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+      </div>
+      <div>
+          <label for="product-image" class="block font-medium text-gray-700">Imagem (URL):</label>
+          <input type="text" id="product-image" name="product-image" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+      </div>
+      <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">Adicionar Produto</button>
+  </form>
+</div>
+
+<button id="admin-button" class="bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-4">Acessar Painel Admin</button>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- fim do Button  Cart-footer  92909376-6497-->
  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
  <script src="scripts.js"></script>

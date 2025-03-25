@@ -9,24 +9,139 @@ const cartCounter = document.getElementById("cart-count")// Elemento para exibir
 const errorWarn = document.getElementById("error-warn") // Elemento para exibir a mensagem de erro/warn
 const addressInput = document.getElementById("address")   // Elemento de entrada de endereço de entrega
 const addressWarn = document.getElementById("address-warn") // Elemento para exibir a mensagem de erro/warn
-
-
 const deliveryMethodSelect = document.getElementById("delivery-method");
 const paymentMethodSelect = document.getElementById("payment-method");
 const pixDetailsDiv = document.getElementById("pix-details");
 const addressLabel = document.getElementById("address-label");
-
-
 const copyPixKeyButton = document.getElementById("copy-pix-key");
 const pixKey = document.getElementById("pix-key");
+
+const productForm = document.getElementById("product-form");
+const menuDiv = document.getElementById("menu");
+
+const adminPanel = document.getElementById("admin-panel");
+const adminButton = document.getElementById("admin-button");
+
+
+
+const closeAdminPanelButton = document.getElementById("close-admin-panel");
+
+
+
+
+
+
+
+
+
+
+// adminButton.addEventListener("click", function () {
+//     const password = prompt("Digite a senha de administrador:");
+//     if (password === "123456") { // Substitua "suaSenha" por uma senha segura
+//         adminPanel.classList.remove("hidden");
+//     } else {
+//         alert("Senha incorreta.");
+//     }
+// });
+
+// productForm.addEventListener("submit", function (event) {
+//     event.preventDefault();
+//     const productName = document.getElementById("product-name").value;
+//     const productPrice = document.getElementById("product-price").value;
+//     const productDescription = document.getElementById("product-description").value;
+//     const productImage = document.getElementById("product-image").files[0];
+//     const productType = document.getElementById("product-type").value;
+
+//     if (productImage) {
+//         const reader = new FileReader();
+//         reader.onload = function (e) {
+//             const imageUrl = e.target.result;
+//             addProductToMenu(productName, productPrice, productDescription, imageUrl, productType);
+//         };
+//         reader.readAsDataURL(productImage);
+//     } else {
+//         addProductToMenu(productName, productPrice, productDescription, null, productType);
+//     }
+
+//     alert("Produto adicionado com sucesso!");
+//     productForm.reset();
+// });
+
+// closeAdminPanelButton.addEventListener("click", function () {
+//     adminPanel.classList.add("hidden");
+// });
+
+// function addProductToMenu(name, price, imageUrl, type) {
+//     const productDiv = document.createElement("div");
+//     productDiv.classList.add("flex", "gap-5");
+
+//     let imageHtml = "";
+//     if (imageUrl) {
+//         imageHtml = `<img src="${imageUrl}" alt="${name}" class="w-28 h-28 rounded-lg hover:scale-110 hover:-rotate-12 duration-300"/>`;
+//     } else {
+//         imageHtml = `<img src="./assets/default-product.png" alt="${name}" class="w-28 h-28 rounded-lg hover:scale-110 hover:-rotate-12 duration-300"/>`;
+//     }
+
+//     productDiv.innerHTML = `
+//         ${imageHtml}
+//         <div>
+//             <p class="font-bold">${name}</p>
+//             <p class="text-sm">Descrição do produto</p>
+//             <div class="flex items-center gap-2 justify-between mt-3">
+//                 <p class="font-bold text-lg">R$ ${price}</p>
+//                 <button class="bg-gray-900 px-5 rounded add-to-cart-btn" data-name="${name}" data-price="${price}">
+//                     <i class="fa fa-cart-plus text-lg text-white"></i>
+//                 </button>
+//             </div>
+//         </div>
+//     `;
+
+//     if (type === "sandwich") {
+//         menuDiv.querySelector("main").appendChild(productDiv);
+//     } else if (type === "drink") {
+//         menuDiv.querySelectorAll("div.grid")[1].appendChild(productDiv);
+//     }
+// }
+
+function addProductToMenu(name, price, description, imageUrl, type) {
+    const productDiv = document.createElement("div");
+    productDiv.classList.add("flex", "gap-5");
+
+    let imageHtml = "";
+    if (imageUrl) {
+        imageHtml = `<img src="${imageUrl}" alt="${name}" class="w-28 h-28 rounded-lg hover:scale-110 hover:-rotate-12 duration-300"/>`;
+    } else {
+        imageHtml = `<img src="./assets/default-product.png" alt="${name}" class="w-28 h-28 rounded-lg hover:scale-110 hover:-rotate-12 duration-300"/>`;
+    }
+
+    productDiv.innerHTML = `
+        ${imageHtml}
+        <div>
+            <p class="font-bold">${name}</p>
+            <p class="text-sm">${description}</p>
+            <div class="flex items-center gap-2 justify-between mt-3">
+                <p class="font-bold text-lg">R$ ${price}</p>
+                <button class="bg-gray-900 px-5 rounded add-to-cart-btn" data-name="${name}" data-price="${price}">
+                    <i class="fa fa-cart-plus text-lg text-white"></i>
+                </button>
+            </div>
+        </div>
+    `;
+
+    if (type === "sandwich") {
+        menuDiv.querySelector("main").appendChild(productDiv);
+    } else if (type === "drink") {
+        menuDiv.querySelectorAll("div.grid")[1].appendChild(productDiv);
+    }
+}
+
+
 
 
 
 
 
 let cart = []
-
-
 
 //
 deliveryMethodSelect.addEventListener("change", function () {
@@ -39,7 +154,6 @@ deliveryMethodSelect.addEventListener("change", function () {
         addressLabel.classList.remove("hidden");
     }
 });
-
 
 // Função exibir o modal do carrinho
 cartBtn.addEventListener("click", function () {
@@ -74,7 +188,21 @@ function addToCart(name, price) {
 
     // Verificar se o item já está no carrinho
     const existingItem = cart.find(item => item.name === name)     
-    alert("Item " + name + "adicionado ao carrinho!")   
+    //alert("Item " + name + "adicionado ao carrinho!") 
+    Toastify({
+        text: "Item " + name + " " + "adicionado ao carrinho!",
+        duration: 2000,
+        close: true,
+        gravity: "top",
+        position: "center",
+        stopOnFocus: true,
+        style: {
+            background: "#00FA9A",
+        },
+        onClick: function () {},
+    }).showToast();
+    
+
     if (existingItem) {
         // Se o item já está no carrinho, incrementar a quantidade
         existingItem.quantity +=1;
@@ -206,7 +334,7 @@ function checRestauranteOpen() {
     const data = new Date();
     const hour = data.getHours();
     //return hour >= 23 && hour < 1; // Ajuste para 18h às 21:59
-    return hour >= 23 || hour < 6; // Verifica se está entre 23:00 e 05:59
+    return hour >= 8 || hour < 11; // Verifica se está entre 23:00 e 05:59
 }
 
 const spanItem = document.getElementById("date-span"); // Seleciona a div
@@ -234,7 +362,6 @@ paymentMethodSelect.addEventListener("change", function () {
         pixDetailsDiv.classList.remove("flex", "flex-col", "items-center", "justify-center");
     }
 });
-
 
 
 copyPixKeyButton.addEventListener("click", function () {
