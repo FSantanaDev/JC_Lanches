@@ -16,16 +16,15 @@ const addressLabel = document.getElementById("address-label");
 const copyPixKeyButton = document.getElementById("copy-pix-key");
 const pixKey = document.getElementById("pix-key");
 
-const productForm = document.getElementById("product-form");
-const menuDiv = document.getElementById("menu");
-<<<<<<< HEAD
+// const productForm = document.getElementById("product-form");
+// const menuDiv = document.getElementById("menu");
 
-const adminPanel = document.getElementById("admin-panel");
-const adminButton = document.getElementById("admin-button");
-
+// const adminPanel = document.getElementById("admin-panel");
+// const adminButton = document.getElementById("admin-button");
 
 
-const closeAdminPanelButton = document.getElementById("close-admin-panel");
+
+// const closeAdminPanelButton = document.getElementById("close-admin-panel");
 
 
 
@@ -138,51 +137,49 @@ function addProductToMenu(name, price, description, imageUrl, type) {
 
 
 
-=======
->>>>>>> dcdee8bdc18d9a1e69fae4e2c4c4335e3d4faea9
 
-const adminPanel = document.getElementById("admin-panel");
-const adminButton = document.getElementById("admin-button");
+// const adminPanel = document.getElementById("admin-panel");
+// const adminButton = document.getElementById("admin-button");
 
 
 
 const closeAdminPanelButton = document.getElementById("close-admin-panel");
 
-adminButton.addEventListener("click", function () {
-    const password = prompt("Digite a senha de administrador:");
-    if (password === "123456") { // Substitua "suaSenha" por uma senha segura
-        adminPanel.classList.remove("hidden");
-    } else {
-        alert("Senha incorreta.");
-    }
-});
+// adminButton.addEventListener("click", function () {
+//     const password = prompt("Digite a senha de administrador:");
+//     if (password === "123456") { // Substitua "suaSenha" por uma senha segura
+//         adminPanel.classList.remove("hidden");
+//     } else {
+//         alert("Senha incorreta.");
+//     }
+// });
 
-productForm.addEventListener("submit", function (event) {
-    event.preventDefault();
-    const productName = document.getElementById("product-name").value;
-    const productPrice = document.getElementById("product-price").value;
-    const productDescription = document.getElementById("product-description").value;
-    const productImage = document.getElementById("product-image").files[0];
-    const productType = document.getElementById("product-type").value;
+// productForm.addEventListener("submit", function (event) {
+//     event.preventDefault();
+//     const productName = document.getElementById("product-name").value;
+//     const productPrice = document.getElementById("product-price").value;
+//     const productDescription = document.getElementById("product-description").value;
+//     const productImage = document.getElementById("product-image").files[0];
+//     const productType = document.getElementById("product-type").value;
 
-    if (productImage) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            const imageUrl = e.target.result;
-            addProductToMenu(productName, productPrice, productDescription, imageUrl, productType);
-        };
-        reader.readAsDataURL(productImage);
-    } else {
-        addProductToMenu(productName, productPrice, productDescription, null, productType);
-    }
+//     if (productImage) {
+//         const reader = new FileReader();
+//         reader.onload = function (e) {
+//             const imageUrl = e.target.result;
+//             addProductToMenu(productName, productPrice, productDescription, imageUrl, productType);
+//         };
+//         reader.readAsDataURL(productImage);
+//     } else {
+//         addProductToMenu(productName, productPrice, productDescription, null, productType);
+//     }
 
-    alert("Produto adicionado com sucesso!");
-    productForm.reset();
-});
+//     alert("Produto adicionado com sucesso!");
+//     productForm.reset();
+// });
 
-closeAdminPanelButton.addEventListener("click", function () {
-    adminPanel.classList.add("hidden");
-});
+// closeAdminPanelButton.addEventListener("click", function () {
+//     adminPanel.classList.add("hidden");
+// });
 
 
 
