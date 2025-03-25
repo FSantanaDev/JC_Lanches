@@ -18,6 +18,7 @@ const pixKey = document.getElementById("pix-key");
 
 const productForm = document.getElementById("product-form");
 const menuDiv = document.getElementById("menu");
+<<<<<<< HEAD
 
 const adminPanel = document.getElementById("admin-panel");
 const adminButton = document.getElementById("admin-button");
@@ -137,7 +138,85 @@ function addProductToMenu(name, price, description, imageUrl, type) {
 
 
 
+=======
+>>>>>>> dcdee8bdc18d9a1e69fae4e2c4c4335e3d4faea9
 
+const adminPanel = document.getElementById("admin-panel");
+const adminButton = document.getElementById("admin-button");
+
+
+
+const closeAdminPanelButton = document.getElementById("close-admin-panel");
+
+adminButton.addEventListener("click", function () {
+    const password = prompt("Digite a senha de administrador:");
+    if (password === "123456") { // Substitua "suaSenha" por uma senha segura
+        adminPanel.classList.remove("hidden");
+    } else {
+        alert("Senha incorreta.");
+    }
+});
+
+productForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+    const productName = document.getElementById("product-name").value;
+    const productPrice = document.getElementById("product-price").value;
+    const productDescription = document.getElementById("product-description").value;
+    const productImage = document.getElementById("product-image").files[0];
+    const productType = document.getElementById("product-type").value;
+
+    if (productImage) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            const imageUrl = e.target.result;
+            addProductToMenu(productName, productPrice, productDescription, imageUrl, productType);
+        };
+        reader.readAsDataURL(productImage);
+    } else {
+        addProductToMenu(productName, productPrice, productDescription, null, productType);
+    }
+
+    alert("Produto adicionado com sucesso!");
+    productForm.reset();
+});
+
+closeAdminPanelButton.addEventListener("click", function () {
+    adminPanel.classList.add("hidden");
+});
+
+
+
+function addProductToMenu(name, price, description, imageUrl, type) {
+    const productDiv = document.createElement("div");
+    productDiv.classList.add("flex", "gap-5");
+
+    let imageHtml = "";
+    if (imageUrl) {
+        imageHtml = `<img src="${imageUrl}" alt="${name}" class="w-28 h-28 rounded-lg hover:scale-110 hover:-rotate-12 duration-300"/>`;
+    } else {
+        imageHtml = `<img src="./assets/default-product.png" alt="${name}" class="w-28 h-28 rounded-lg hover:scale-110 hover:-rotate-12 duration-300"/>`;
+    }
+
+    productDiv.innerHTML = `
+        ${imageHtml}
+        <div>
+            <p class="font-bold">${name}</p>
+            <p class="text-sm">${description}</p>
+            <div class="flex items-center gap-2 justify-between mt-3">
+                <p class="font-bold text-lg">R$ ${price}</p>
+                <button class="bg-gray-900 px-5 rounded add-to-cart-btn" data-name="${name}" data-price="${price}">
+                    <i class="fa fa-cart-plus text-lg text-white"></i>
+                </button>
+            </div>
+        </div>
+    `;
+
+    if (type === "sandwich") {
+        menuDiv.querySelector("main").appendChild(productDiv);
+    } else if (type === "drink") {
+        menuDiv.querySelectorAll("div.grid")[1].appendChild(productDiv);
+    }
+}
 
 
 
@@ -320,7 +399,7 @@ checkoutBtn.addEventListener("click", function () {
     }).join("");
 
     const message = encodeURIComponent(`${cartItems} Endereço: ${addressInput.value}`);
-    const phone = "5592991155839";
+    const phone = "5592993166417"; 
 
     window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
 
